@@ -22,9 +22,6 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @PropertySource("classpath:db.properties")
 public class WebConfig implements WebMvcConfigurer {
 
-	@Autowired
-	private Environment env;
-
 	private final ApplicationContext applicationContext;
 
 	public WebConfig(ApplicationContext applicationContext) {

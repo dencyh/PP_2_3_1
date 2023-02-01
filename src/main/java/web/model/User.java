@@ -2,6 +2,7 @@ package web.model;
 
 
 import javax.persistence.*;
+import java.util.function.Function;
 
 @Entity
 @Table(name = "users")
@@ -27,6 +28,7 @@ public class User {
 	}
 
 	public User(String name, String lastName, String email, byte age) {
+		Function
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
