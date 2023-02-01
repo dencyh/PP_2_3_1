@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void save(User user) {
-
+	public void add(User user) {
+		userDao.add(user);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteById(long id) {
-
+		userDao.deleteById(id);
 	}
 
 	@Override

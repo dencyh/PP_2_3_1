@@ -9,7 +9,7 @@ public interface UserService {
 
     void dropTable();
 
-    void save(User user);
+    void add(User user);
 
     List<User> getAll();
 

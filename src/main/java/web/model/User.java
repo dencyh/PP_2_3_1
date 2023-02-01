@@ -1,13 +1,13 @@
 package web.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.function.Function;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
 public class User {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -15,24 +15,29 @@ public class User {
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "firstName", nullable = false)
+	private String firstName;
 
 	@Column(name = "lastName", nullable = false)
 	private String lastName;
 
-	@Column(name = "age", nullable = false)
-	private byte age;
+	@Transient
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date birthDate;
+
+	@Column(name = "birthDate", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private java.sql.Date SQLBirthDate;
 
 	public User() {
 	}
 
-	public User(String name, String lastName, String email, byte age) {
-		Function
-		this.name = name;
+	public User(String firstName, String lastName, String email, Date birthDate) {
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.age = age;
+		this.birthDate = birthDate;
+		this.SQLBirthDate = new java.sql.Date(birthDate.getTime());
 	}
 
 	public long getId() {
@@ -43,12 +48,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -67,20 +72,29 @@ public class User {
 		this.email = email;
 	}
 
-	public byte getAge() {
-		return age;
+	public Date getBirthDate() {
+		return birthDate;
 	}
 
-	public void setAge(byte age) {
-		this.age = age;
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+		this.SQLBirthDate = new java.sql.Date(birthDate.getTime());
+	}
+
+	public java.sql.Date getSQLBirthDate() {
+		return SQLBirthDate;
+	}
+
+	public void setSQLBirthDate(java.sql.Date SQLBirthDate) {
+		this.SQLBirthDate = SQLBirthDate;
 	}
 
 	@Override
 	public String toString() {
 		return "id = " + id +
 			   "\nemail = " + email +
-			   "\nname = " + name +
+			   "\nfirstName = " + firstName +
 			   "\nlastName = " + lastName +
-			   "\nage = " + age;
+			   "\nbirthDate = " + birthDate;
 	}
 }
