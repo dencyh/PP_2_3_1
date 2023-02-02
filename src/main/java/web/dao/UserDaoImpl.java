@@ -14,12 +14,8 @@ public class UserDaoImpl implements UserDao {
 	private EntityManager entityManager;
 
 	@Override
-	public void creatTable() {
-	}
-
-	@Override
-	public void dropTable() {
-
+	public User getOneById(long id) {
+		return entityManager.find(User.class, id);
 	}
 
 	@Override
@@ -45,6 +41,8 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void updateById(long id, User user) {
+	@Transactional
+	public void update(User user) {
+		entityManager.merge(user);
 	}
 }

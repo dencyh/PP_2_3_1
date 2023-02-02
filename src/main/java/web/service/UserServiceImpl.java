@@ -17,13 +17,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void creatTable() {
-
-	}
-
-	@Override
-	public void dropTable() {
-
+	public User getOneById(long id) {
+		return userDao.getOneById(id);
 	}
 
 	@Override
@@ -42,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateById(long id, User user) {
-
+	public void update(User user) {
+		userDao.update(user);
 	}
 }

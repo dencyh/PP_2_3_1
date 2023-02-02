@@ -34,12 +34,9 @@
             <td th:text="${user.getLastName()}"/>
             <td th:text="${#dates.format(user.getSQLBirthDate(), 'dd-MM-yyyy')}"/>
             <td class="d-flex gap-3">
-                <form>
-                    <button class="btn btn-warning" data-bs-toggle="modal"
-                            data-bs-target="#editModal">
-                        <i class="bi bi-pencil-fill"></i>
-                    </button>
-                </form>
+                <a th:href="@{'/users/{id}/edit'(id=${user.getId()})}" class="btn btn-warning">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
                 <form th:method="DELETE" th:action="@{'/users/{id}'(id=${user.getId()})}">
                     <button class="btn btn-danger" aria-label="delete" type="submit">
                         <i class="bi bi-trash-fill"></i>
@@ -49,24 +46,7 @@
         </tr>
         </tbody>
     </table>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="editModalLabel">Edit user</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard changes</button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 </div>
 </body>
 </html>

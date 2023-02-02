@@ -5,15 +5,13 @@ import web.model.User;
 import java.util.List;
 
 public interface UserService {
-    void creatTable();
-
-    void dropTable();
-
     void add(User user);
 
     List<User> getAll();
 
+    User getOneById(long id);
+
     void deleteById(long id);
 
-    void updateById(long id, User user);
+    void update( User user);
 }

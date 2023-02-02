@@ -50,4 +50,17 @@ public class UserController {
 		return "redirect:/";
 	}
 
+	@GetMapping(value = "/users/{id}/edit")
+	public String editUser(Model model, @PathVariable long id) {
+		User user = userService.getOneById(id);
+		user.setBirthDate(new Date(user.getSQLBirthDate().getTime()));
+		model.addAttribute(user);
+		return "edit";
+	}
+
+	@PatchMapping(value  = "/users/{id}/update")
+	public String updateUser(@ModelAttribute User user) {
+		userService.update(user);
+		return "redirect:/";
+	}
 }
