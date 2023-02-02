@@ -23,21 +23,21 @@ public class User {
 
 	@Transient
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date birthDate;
+	private Date utilBirthDate;
 
 	@Column(name = "birthDate", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private java.sql.Date SQLBirthDate;
+	private java.sql.Date birthDate;
 
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String email, Date birthDate) {
+	public User(String firstName, String lastName, String email, Date utilBirthDate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.birthDate = birthDate;
-		this.SQLBirthDate = new java.sql.Date(birthDate.getTime());
+		this.utilBirthDate = utilBirthDate;
+		this.birthDate = new java.sql.Date(utilBirthDate.getTime());
 	}
 
 	public long getId() {
@@ -72,21 +72,21 @@ public class User {
 		this.email = email;
 	}
 
-	public Date getBirthDate() {
+	public Date getUtilBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setUtilBirthDate(Date utilBirthDate) {
+		this.utilBirthDate = utilBirthDate;
+		this.birthDate = new java.sql.Date(utilBirthDate.getTime());
+	}
+
+	public java.sql.Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(java.sql.Date birthDate) {
 		this.birthDate = birthDate;
-		this.SQLBirthDate = new java.sql.Date(birthDate.getTime());
-	}
-
-	public java.sql.Date getSQLBirthDate() {
-		return SQLBirthDate;
-	}
-
-	public void setSQLBirthDate(java.sql.Date SQLBirthDate) {
-		this.SQLBirthDate = SQLBirthDate;
 	}
 
 	@Override

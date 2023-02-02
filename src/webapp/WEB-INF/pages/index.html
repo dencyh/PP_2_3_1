@@ -32,7 +32,7 @@
             <td th:text="${user.getEmail()}"/>
             <td th:text="${user.getFirstName()}"/>
             <td th:text="${user.getLastName()}"/>
-            <td th:text="${#dates.format(user.getSQLBirthDate(), 'dd-MM-yyyy')}"/>
+            <td th:text="${#dates.format(user.getBirthDate(), 'dd-MM-yyyy')}"/>
             <td class="d-flex gap-3">
                 <a th:href="@{'/users/{id}/edit'(id=${user.getId()})}" class="btn btn-warning">
                     <i class="bi bi-pencil-fill"></i>
@@ -46,7 +46,6 @@
         </tr>
         </tbody>
     </table>
-</div>
 </div>
 </body>
 </html>

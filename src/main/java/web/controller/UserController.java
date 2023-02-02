@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 @Controller
 public class UserController {
 	private final UserService userService;
@@ -23,44 +19,37 @@ public class UserController {
 
 	@GetMapping(value = "/")
 	public String getUserList(ModelMap model) {
-		model.addAttribute("users", userService.getAll());
+		model.addAttribute("users", userService.getAllUsers());
 		return "index";
 	}
 
 	@GetMapping(value = "/users/new")
 	public String showNewForm(Model model) {
-		User user = new User();
-		try {
-			user.setBirthDate(new Date(new SimpleDateFormat("yyyy-MM-dd").parse("2000-01-01").getTime()));
-		} catch (ParseException ignored) {
-		}
-		model.addAttribute("newUser", user);
+		model.addAttribute("newUser", new User());
 		return "new";
 	}
 
 	@PostMapping(value = "/users")
 	public String addNewUser(@ModelAttribute User user) {
-		userService.add(user);
+		userService.saveUser(user);
 		return "redirect:/";
 	}
 
 	@DeleteMapping(value ="/users/{id}")
 	public String deleteUser(@PathVariable long id) {
-		userService.deleteById(id);
+		userService.deleteUserById(id);
 		return "redirect:/";
 	}
 
 	@GetMapping(value = "/users/{id}/edit")
 	public String editUser(Model model, @PathVariable long id) {
-		User user = userService.getOneById(id);
-		user.setBirthDate(new Date(user.getSQLBirthDate().getTime()));
-		model.addAttribute(user);
+		model.addAttribute(userService.getUserById(id));
 		return "edit";
 	}
 
 	@PatchMapping(value  = "/users/{id}/update")
 	public String updateUser(@ModelAttribute User user) {
-		userService.update(user);
+		userService.updateUser(user);
 		return "redirect:/";
 	}
 }
